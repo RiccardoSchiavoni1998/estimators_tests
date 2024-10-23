@@ -16,15 +16,15 @@
 # ****************************************************************************
 
 from ...base_algorithm import optimal_parameter
-from ...SDFqEstimator.sdfq_algorithm import SDFqAlgorithm
-from ...SDFqEstimator.sdfq_problem import SDFqProblem
-from ...SDFqEstimator.sdfq_helper import _mem_matrix, binom, log2, min_max, inf
+from ...RSDEstimator.rsd_algorithm import RSDAlgorithm
+from ...RSDEstimator.rsd_problem import RSDProblem
+from ...RSDEstimator.rsd_helper import _mem_matrix, binom, log2, min_max, inf
 from types import SimpleNamespace
-from ..sdfq_constants import *
+from ..rsd_constants import *
 
 
-class Stern(SDFqAlgorithm):
-    def __init__(self, problem: SDFqProblem, **kwargs):
+class Stern(RSDAlgorithm):
+    def __init__(self, problem: RSDProblem, **kwargs):
         """
         Construct an instance of Stern's estimator [Pet11]_, [Ste88]_, [BLP08]_.
 
@@ -41,9 +41,9 @@ class Stern(SDFqAlgorithm):
 
         EXAMPLES::
 
-            sage: from cryptographic_estimators.SDFqEstimator.SDFqAlgorithms import Stern
-            sage: from cryptographic_estimators.SDFqEstimator import SDFqProblem
-            sage: Stern(SDFqProblem(n=100,k=50,w=10,q=3))
+            sage: from cryptographic_estimators.RSDEstimator.RSDAlgorithms import Stern
+            sage: from cryptographic_estimators.RSDEstimator import RSDProblem
+            sage: Stern(RSDProblem(n=100,k=50,w=10,q=3))
             Stern estimator for syndrome decoding problem with (n,k,w) = (100,50,10) over Finite Field of size 3
 
         """
@@ -60,9 +60,9 @@ class Stern(SDFqAlgorithm):
 
         EXAMPLES::
 
-            sage: from cryptographic_estimators.SDFqEstimator.SDFqAlgorithms import Stern
-            sage: from cryptographic_estimators.SDFqEstimator import SDFqProblem
-            sage: A = Stern(SDFqProblem(n=100,k=50,w=10,q=3))
+            sage: from cryptographic_estimators.RSDEstimator.RSDAlgorithms import Stern
+            sage: from cryptographic_estimators.RSDEstimator import RSDProblem
+            sage: A = Stern(RSDProblem(n=100,k=50,w=10,q=3))
             sage: A.l()
             7
 
@@ -77,9 +77,9 @@ class Stern(SDFqAlgorithm):
 
         EXAMPLES::
 
-            sage: from cryptographic_estimators.SDFqEstimator.SDFqAlgorithms import Stern
-            sage: from cryptographic_estimators.SDFqEstimator import SDFqProblem
-            sage: A = Stern(SDFqProblem(n=100,k=50,w=10,q=3))
+            sage: from cryptographic_estimators.RSDEstimator.RSDAlgorithms import Stern
+            sage: from cryptographic_estimators.RSDEstimator import RSDProblem
+            sage: A = Stern(RSDProblem(n=100,k=50,w=10,q=3))
             sage: A.p()
             2
 
@@ -122,7 +122,7 @@ class Stern(SDFqAlgorithm):
         parameters. Code originaly from
             - https://github.com/secomms/pkpattack/blob/main/cost_isd.sage
         which was adapted from:
-            - https://github.com/christianepetersisdfq/blob/master/isdfq.gp
+            - https://github.com/christianepetersirsd/blob/master/irsd.gp
 
         INPUT:
         -  ``parameters`` -- dictionary including parameters
@@ -130,14 +130,14 @@ class Stern(SDFqAlgorithm):
                                       `gauß` and `list` will be returned.
 
         """
-        n, k, w, q = self.problem.get_parameters()
+        n, k, w, q, z = self.problem.get_parameters()
         par = SimpleNamespace(**parameters)
         k1 = k // 2
 
         memory_bound = self.problem.memory_bound
 
-        L1 = binom(k1, par.p) * (q-1)**par.p
-        L2 = binom(k-k1, par.p) * (q-1)**par.p
+        L1 = binom(k1, par.p) * (z)**par.p
+        L2 = binom(k-k1, par.p) * (z)**par.p
         if self._is_early_abort_possible(log2(L1)):
             return inf, inf
 

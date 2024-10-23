@@ -15,13 +15,13 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ****************************************************************************
 
-from ..SDFqEstimator.sdfq_algorithm import SDFqAlgorithm
-from ..SDFqEstimator.sdfq_problem import SDFqProblem
+from ..RSDEstimator.rsd_algorithm import RSDAlgorithm
+from ..RSDEstimator.rsd_problem import RSDProblem
 from ..base_estimator import BaseEstimator
 from math import inf
 
 
-class SDFqEstimator(BaseEstimator):
+class RSDEstimator(BaseEstimator):
     """ 
 
     INPUT:
@@ -36,12 +36,12 @@ class SDFqEstimator(BaseEstimator):
     """
     excluded_algorithms_by_default = []
 
-    def __init__(self, n: int, k: int, w: int, q: int, memory_bound=inf, **kwargs):
+    def __init__(self, n: int, k: int, w: int, q: int, z: int, memory_bound=inf, **kwargs):
         if not kwargs.get("excluded_algorithms"):
             kwargs["excluded_algorithms"] = []
 
         kwargs["excluded_algorithms"] += self.excluded_algorithms_by_default
-        super(SDFqEstimator, self).__init__(SDFqAlgorithm, SDFqProblem(
+        super(RSDEstimator, self).__init__(RSDAlgorithm, RSDProblem(
             n, k, w, q, memory_bound=memory_bound, **kwargs), **kwargs)
 
     def table(self, show_quantum_complexity=0, show_tilde_o_time=0,
@@ -59,8 +59,8 @@ class SDFqEstimator(BaseEstimator):
 
         EXAMPLES::
 
-            sage: from cryptographic_estimators.SDFqEstimator import SDFqEstimator
-            sage: A = SDFqEstimator(n=100,k=50,w=10,q=5)
+            sage: from cryptographic_estimators.RSDEstimator import RSDEstimator
+            sage: A = RSDEstimator(n=100,k=50,w=10,q=5)
             sage: A.table()
             +-------------+---------------+
             |             |    estimate   |
@@ -74,8 +74,8 @@ class SDFqEstimator(BaseEstimator):
 
         TESTS::
 
-            sage: from cryptographic_estimators.SDFqEstimator import SDFqEstimator
-            sage: A = SDFqEstimator(961,771,48,31)
+            sage: from cryptographic_estimators.RSDEstimator import RSDEstimator
+            sage: A = RSDEstimator(961,771,48,31)
             sage: A.table(precision=3, show_all_parameters=1)
             +-------------+-------------------------------------+
             |             |               estimate              |
@@ -87,7 +87,7 @@ class SDFqEstimator(BaseEstimator):
             | LeeBrickell | 140.319 | 21.808 |     {'p': 2}     |
             +-------------+---------+--------+------------------+
         """
-        super(SDFqEstimator, self).table(show_quantum_complexity=show_quantum_complexity,
+        super(RSDEstimator, self).table(show_quantum_complexity=show_quantum_complexity,
                                        show_tilde_o_time=show_tilde_o_time,
                                        show_all_parameters=show_all_parameters,
                                        precision=precision, truncate=truncate)

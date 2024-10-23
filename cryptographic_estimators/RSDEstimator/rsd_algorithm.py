@@ -17,23 +17,23 @@
 
 from ..helper import ComplexityType
 from ..base_algorithm import BaseAlgorithm, optimal_parameter
-from .sdfq_problem import SDFqProblem
-from .sdfq_helper import _optimize_m4ri
+from .rsd_problem import RSDProblem
+from .rsd_helper import _optimize_m4ri
 from math import inf, log2
 
 
-class SDFqAlgorithm(BaseAlgorithm):
+class RSDAlgorithm(BaseAlgorithm):
     """
     Base class for Syndrome Decoding over FQ algorithms complexity estimator
 
     INPUT:
 
-    - ``problem`` -- SDFqProblem object including all necessary parameters
+    - ``problem`` -- RSDProblem object including all necessary parameters
     - ``hmp`` -- Indicates if Hashmap is used for list matching, if false sorting is used (default: true)
     """
 
-    def __init__(self, problem: SDFqProblem, **kwargs):
-        super(SDFqAlgorithm, self).__init__(problem, **kwargs)
+    def __init__(self, problem: RSDProblem, **kwargs):
+        super(RSDAlgorithm, self).__init__(problem, **kwargs)
         self._hmap = kwargs.get("hmap", 1)
         self._adjust_radius = kwargs.get("adjust_radius", 10)
 
