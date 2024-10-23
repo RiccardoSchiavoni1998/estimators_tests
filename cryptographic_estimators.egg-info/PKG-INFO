@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: cryptographic-estimators
+Version: 1.4.0
+Summary: This library provides bit security estimators and asymptotic complexity estimators for cyrptographic problems. So far it covers the binary Syndrome Decoding Problem (SDEstimator) and the Multivaritate Quadratic Problem (MQEstimator).
+Author: TII
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+License-File: LICENSE
