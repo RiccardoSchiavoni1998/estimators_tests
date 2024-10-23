@@ -18,10 +18,11 @@
 
 from enum import Enum
 
-SDFQ_CODE_LENGTH = "code length"
-SDFQ_CODE_DIMENSION = "code dimension"
-SDFQ_ERROR_WEIGHT = "error weight"
-SDFQ_ERROR_FIELD_SIZE = "field size"
+RSD_CODE_LENGTH = "code length"
+RSD_CODE_DIMENSION = "code dimension"
+RSD_ERROR_WEIGHT = "error weight"
+RSD_SYNDROME_FIELD_SIZE = "syndrome size"
+RSD_ERROR_FIELD_SIZE = "field size"
 
 
 class VerboseInformation(Enum):

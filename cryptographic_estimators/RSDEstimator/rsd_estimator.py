@@ -42,7 +42,7 @@ class RSDEstimator(BaseEstimator):
 
         kwargs["excluded_algorithms"] += self.excluded_algorithms_by_default
         super(RSDEstimator, self).__init__(RSDAlgorithm, RSDProblem(
-            n, k, w, q, memory_bound=memory_bound, **kwargs), **kwargs)
+            n, k, w, q, z, memory_bound=memory_bound, **kwargs), **kwargs)
 
     def table(self, show_quantum_complexity=0, show_tilde_o_time=0,
               show_all_parameters=0, precision=1, truncate=0):

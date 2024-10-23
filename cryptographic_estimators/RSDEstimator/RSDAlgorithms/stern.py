@@ -49,7 +49,7 @@ class Stern(RSDAlgorithm):
         """
         self._name = "Stern"
         super(Stern, self).__init__(problem, **kwargs)
-        n, k, w, _ = self.problem.get_parameters()
+        n, k, w, _, _= self.problem.get_parameters()
         self.set_parameter_ranges("p", 0, max(w // 2, 1))
         self.set_parameter_ranges("l", 0, n-k)
 
@@ -91,7 +91,7 @@ class Stern(RSDAlgorithm):
         """
         Return if the parameter set `parameters` is invalid
         """
-        n, k, w, _ = self.problem.get_parameters()
+        n, k, w, _, _= self.problem.get_parameters()
         par = SimpleNamespace(**parameters)
         k1 = k // 2
         if par.p > w or k1 < par.p or n - k - par.l < w - 2 * par.p:
@@ -105,10 +105,10 @@ class Stern(RSDAlgorithm):
         """
         new_ranges = self._fix_ranges_for_already_set_parameters()
 
-        _, k, _, q = self.problem.get_parameters()
+        _, k, _, q, z = self.problem.get_parameters()
         k1 = k//2
         for p in range(new_ranges["p"]["min"], min(k1, new_ranges["p"]["max"])):
-            l_val = int(log2(binom(k1, p)) - log2(q-1)*p)
+            l_val = int(log2(binom(k1, p)) - log2(z)*p)
             l_search_radius = self._adjust_radius
             for l in range(max(new_ranges["l"]["min"], l_val-l_search_radius), min(new_ranges["l"]["max"], l_val+l_search_radius)):
                 indices = {"p": p, "l": l}

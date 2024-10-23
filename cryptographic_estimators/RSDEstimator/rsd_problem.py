@@ -17,7 +17,7 @@
 
 from ..base_problem import BaseProblem
 from math import log2, comb
-from .rsd_constants_constants import *
+from .rsd_constants import *
 
 
 class RSDProblem(BaseProblem):
@@ -38,8 +38,6 @@ class RSDProblem(BaseProblem):
         super().__init__(**kwargs)
         if k > n:
             raise ValueError("k must be smaller or equal to n")
-        if w > n - k:
-            raise ValueError("w must be smaller or equal to n-k")
         if w <= 0 or k <= 0:
             raise ValueError("w and k must be at least 1")
         if q <= 2:
@@ -64,7 +62,7 @@ class RSDProblem(BaseProblem):
         - ``basic_operations`` -- Number of field additions (logarithmic)
 
         """
-        _,_,_,q=self.get_parameters()
+        _,_,_,q,z=self.get_parameters()
         return basic_operations + log2(log2(q))
 
     def to_bitcomplexity_memory(self, elements_to_store: float):
@@ -83,7 +81,7 @@ class RSDProblem(BaseProblem):
          Returns the logarithm of the expected number of existing solutions to the problem
 
         """
-        n, k, w, q = self.get_parameters()
+        n, k, w, q, z= self.get_parameters()
         Nw = log2(comb(n, w)) + log2(z)*w + log2(q)*(k - n)
         return max(Nw, 0)
 
@@ -103,5 +101,6 @@ class RSDProblem(BaseProblem):
         n = self.parameters[RSD_CODE_LENGTH]
         k = self.parameters[RSD_CODE_DIMENSION]
         w = self.parameters[RSD_ERROR_WEIGHT]
-        q = self.parameters[RSD_ERROR_FIELD_SIZE]
-        return n, k, w, q
+        q = self.parameters[RSD_SYNDROME_FIELD_SIZE]
+        z = self.parameters[RSD_ERROR_FIELD_SIZE]
+        return n, k, w, q, z
