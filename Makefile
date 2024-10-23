@@ -15,6 +15,7 @@ lib:
 install:
 	@make tools && make lib
 
+  git config --global user.name "Your Name"
 docker-build-x86:
 	@docker build -t ${image_name} .
 
