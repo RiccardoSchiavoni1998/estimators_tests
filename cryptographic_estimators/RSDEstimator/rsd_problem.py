@@ -17,7 +17,7 @@
 
 from ..base_problem import BaseProblem
 from math import log2, comb
-from .RSD_constants import *
+from .rsd_constants_constants import *
 
 
 class RSDProblem(BaseProblem):
