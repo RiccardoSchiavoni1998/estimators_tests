@@ -1,5 +1,4 @@
-from .sdfq_algorithm import SDFqAlgorithm
-from .sdfq_estimator import SDFqEstimator
-from .sdfq_problem import SDFqProblem
-from .sdfq_problem import RSDProblem
-from .SDFqAlgorithms import Prange, LeeBrickell, Stern
+from .rsd_algorithm import RSDAlgorithm
+from .rsd_estimator import RSDEstimator
+from .rsd_problem import RSDProblem
+from .RSDAlgorithms import Stern
