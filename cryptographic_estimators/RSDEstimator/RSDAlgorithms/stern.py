@@ -149,7 +149,8 @@ class Stern(RSDAlgorithm):
 
         Tp = max(0, log2(binom(n, w)) - log2(binom(n - k - par.l, w - 2 * par.p)) - log2(binom(k1, par.p)**2) - solutions)
 
-        Tg = (n-k)**2 * (n+k) // 2 #costo trasformazione in fomra non sistematica
+        #Tg = (n-k)**2 * (n+k) // 2
+        Tg = (n-k)**2 * (n+1) 
         
         build = max(((k1 - par.p + 1) + (L2+L1)) * par.l, 1)
         cost_early_exit = max(1,int(max(q/z * (w - 2 * par.p + 1) * 2*par.p *(1 + (q - 2)/(q - 1)), 1)))
