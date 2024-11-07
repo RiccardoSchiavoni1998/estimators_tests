@@ -30,6 +30,7 @@ class RSDEstimator(BaseEstimator):
     - ``k`` -- code dimension
     - ``w`` -- error weight
     - ``q`` -- base field size
+    - ``z`` -- error set size
     - ``excluded_algorithms`` -- a list/tuple of excluded algorithms (default: None)
     - ``nsolutions`` -- no. of solutions
 

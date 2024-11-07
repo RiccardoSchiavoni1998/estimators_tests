@@ -117,6 +117,7 @@ class Stern(RSDAlgorithm):
                 yield indices
 
     def _time_and_memory_complexity(self, parameters: dict, verbose_information=None):
+        print("STO INISSIN")
         """
         Return time complexity of Sterns's algorithm over Fq for given set of
         parameters. Code originaly from
@@ -157,7 +158,7 @@ class Stern(RSDAlgorithm):
         L = L1*L2//q**par.l
         ops = build + L*cost_early_exit
         time = log2(Tg + ops) + Tp
-
+        print("QUAA OK")
         if verbose_information is not None:
             verbose_information[VerboseInformation.PERMUTATIONS.value] = Tp
             verbose_information[VerboseInformation.GAUSS.value] = log2(Tg)
